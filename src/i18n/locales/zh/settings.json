@@ -1,6 +1,6 @@
 {
   "title": "设置",
-  "subtitle": "配置您的 ClawX 体验",
+  "subtitle": "配置您的 狗蛋AI 体验",
   "appearance": {
     "title": "通用",
     "description": "自定义外观和风格",
@@ -10,7 +10,7 @@
     "system": "跟随系统",
     "language": "语言",
     "launchAtStartup": "开机自动启动",
-    "launchAtStartupDesc": "登录系统后自动启动 ClawX"
+    "launchAtStartupDesc": "登录系统后自动启动 狗蛋AI"
   },
   "aiProviders": {
     "title": "AI 模型提供商",

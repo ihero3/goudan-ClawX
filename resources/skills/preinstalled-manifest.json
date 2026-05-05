@@ -49,9 +49,9 @@
       "autoEnable": true
     },
     {
-      "slug": "tavily-search",
-      "repo": "tavily-ai/skills",
-      "repoPath": "skills/tavily-search",
+      "slug": "brave-web-search",
+      "repo": "brave/brave-search-skills",
+      "repoPath": "skills/web-search",
       "ref": "main",
       "version": "main",
       "autoEnable": true

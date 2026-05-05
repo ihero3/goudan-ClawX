@@ -1,6 +1,6 @@
 {
-    "name": "clawx",
-    "version": "0.4.0-alpha.8",
+    "name": "goudan-ai",
+    "version": "0.2.9-alpha.0",
     "pnpm": {
         "onlyBuiltDependencies": [
             "@discordjs/opus",
@@ -25,9 +25,9 @@
             ]
         }
     },
-    "description": "ClawX - Graphical AI Assistant based on OpenClaw",
+    "description": "狗蛋 - Graphical AI Assistant based on OpenClaw",
     "main": "dist-electron/main/index.js",
-    "author": "ClawX Team",
+    "author": "狗蛋 Team",
     "license": "MIT",
     "private": true,
     "scripts": {
