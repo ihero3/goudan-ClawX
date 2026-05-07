@@ -9,6 +9,7 @@ import { GatewayManager } from '../gateway/manager';
 import { registerIpcHandlers } from './ipc-handlers';
 import { createTray } from './tray';
 import { createMenu } from './menu';
+import { registerZoomShortcuts } from './zoom-shortcuts';
 
 import { appUpdater, registerUpdateHandlers } from './updater';
 import { logger } from '../utils/logger';
@@ -48,17 +49,13 @@ import { browserOAuthManager } from '../utils/browser-oauth';
 import { whatsAppLoginManager } from '../utils/whatsapp-login';
 import { syncAllProviderAuthToRuntime } from '../services/providers/provider-runtime-sync';
 
-<<<<<<< Updated upstream
-const WINDOWS_APP_USER_MODEL_ID = 'app.clawx.desktop';
+const WINDOWS_APP_USER_MODEL_ID = 'app.狗蛋AI.desktop';
 const isE2EMode = process.env.CLAWX_E2E === '1';
 const requestedUserDataDir = process.env.CLAWX_USER_DATA_DIR?.trim();
 
 if (isE2EMode && requestedUserDataDir) {
   app.setPath('userData', requestedUserDataDir);
 }
-=======
-const WINDOWS_APP_USER_MODEL_ID = 'app.狗蛋AI.desktop';
->>>>>>> Stashed changes
 
 // Disable GPU hardware acceleration globally for maximum stability across
 // all GPU configurations (no GPU, integrated, discrete).
@@ -185,6 +182,8 @@ function createWindow(): BrowserWindow {
     frame: isMac || !useCustomTitleBar,
     show: false,
   });
+
+  registerZoomShortcuts(win);
 
   // Handle external links — only allow safe protocols to prevent arbitrary
   // command execution via shell.openExternal() (e.g. file://, ms-msdt:, etc.)

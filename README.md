@@ -101,6 +101,7 @@ Complete the entire setup—from installation to your first AI interaction—thr
 
 ### 💬 Intelligent Chat Interface
 Communicate with AI agents through a modern chat experience. Support for multiple conversation contexts, message history, rich content rendering with Markdown (including GitHub-flavored tables and KaTeX-powered LaTeX math: `$inline$`, `$$block$$`, `\(inline\)`, and `\[block\]`), and direct `@agent` routing in the main composer for multi-agent setups.
+Skills you insert from the composer appear as `/skill-name` chips; click a chip to open the preview sidebar and read that skill's `SKILL.md`.
 When you target another agent with `@agent`, ClawX switches into that agent's own conversation context directly instead of relaying through the default agent. Agent workspaces stay separate by default, and stronger isolation depends on OpenClaw sandbox settings.
 Each agent can also override its own `provider/model` runtime setting; agents without overrides continue inheriting the global default model.
 
@@ -213,49 +214,50 @@ Notes:
 
 ClawX employs a **dual-process architecture** with a unified host API layer. The renderer talks to a single client abstraction, while Electron Main owns protocol selection and process lifecycle:
 
-```┌─────────────────────────────────────────────────────────────────┐
+```
+┌──────────────────────────────────────────────────────────────────┐
 │                        ClawX Desktop App                         │
 │                                                                  │
 │  ┌────────────────────────────────────────────────────────────┐  │
-│  │              Electron Main Process                          │  │
+│  │              Electron Main Process                         │  │
 │  │  • Window & application lifecycle management               │  │
-│  │  • Gateway process supervision                              │  │
-│  │  • System integration (tray, notifications, keychain)       │  │
-│  │  • Auto-update orchestration                                │  │
+│  │  • Gateway process supervision                             │  │
+│  │  • System integration (tray, notifications, keychain)      │  │
+│  │  • Auto-update orchestration                               │  │
 │  └────────────────────────────────────────────────────────────┘  │
-│                              │                                    │
-│                              │ IPC (authoritative control plane)  │
-│                              ▼                                    │
+│                              │                                   │
+│                              │ IPC (authoritative control plane) │
+│                              ▼                                   │
 │  ┌────────────────────────────────────────────────────────────┐  │
-│  │              React Renderer Process                         │  │
-│  │  • Modern component-based UI (React 19)                     │  │
-│  │  • State management with Zustand                            │  │
-│  │  • Unified host-api/api-client calls                        │  │
-│  │  • Rich Markdown rendering                                  │  │
+│  │              React Renderer Process                        │  │
+│  │  • Modern component-based UI (React 19)                    │  │
+│  │  • State management with Zustand                           │  │
+│  │  • Unified host-api/api-client calls                       │  │
+│  │  • Rich Markdown rendering                                 │  │
 │  └────────────────────────────────────────────────────────────┘  │
-└──────────────────────────────┬──────────────────────────────────┘
+└──────────────────────────────┬───────────────────────────────────┘
                                │
                                │ Main-owned transport strategy
                                │ (WS first, HTTP then IPC fallback)
                                ▼
-┌─────────────────────────────────────────────────────────────────┐
-│                Host API & Main Process Proxies                  │
+┌──────────────────────────────────────────────────────────────────┐
+│                Host API & Main Process Proxies                   │
 │                                                                  │
-│  • hostapi:fetch (Main proxy, avoids CORS in dev/prod)          │
+│  • hostapi:fetch (Main proxy, avoids CORS in dev/prod)           │
 │  • gateway:httpProxy (Renderer never calls Gateway HTTP direct)  │
 │  • Unified error mapping & retry/backoff                         │
-└──────────────────────────────┬──────────────────────────────────┘
+└──────────────────────────────┬───────────────────────────────────┘
                                │
                                │ WS / HTTP / IPC fallback
                                ▼
-┌─────────────────────────────────────────────────────────────────┐
+┌──────────────────────────────────────────────────────────────────┐
 │                     OpenClaw Gateway                             │
 │                                                                  │
-│  • AI agent runtime and orchestration                           │
+│  • AI agent runtime and orchestration                            │
 │  • Message channel management                                    │
-│  • Skill/plugin execution environment                           │
+│  • Skill/plugin execution environment                            │
 │  • Provider abstraction layer                                    │
-└─────────────────────────────────────────────────────────────────┘
+└──────────────────────────────────────────────────────────────────┘
 ```
 ### Design Principles
 
